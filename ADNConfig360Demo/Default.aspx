@@ -24,9 +24,11 @@
         {            
             position: relative;
             float:left;
-             width: 69%;
+             width: 57%;
               height: 100%;
-        }
+               top: 0px;
+               left: 0px;
+           }
         #QuatoDiv
         {
             border-style: dashed;
@@ -74,6 +76,28 @@
         {
             width: 109px;
         }
+
+         #SetPdiv
+        {
+           position: relative;
+            float:left;
+             width: 13%;
+              height: 100%;
+               top: 0px;
+             display: block;
+              border-style: dashed;
+               left: 0px;
+           }
+      
+           #GetProp {
+               width: 89px;
+           }
+           #SetProp {
+               width: 88px;
+           }
+           .auto-style1 {
+               width: 45px;
+           }
       
     </style>
 </head>
@@ -84,12 +108,27 @@
           <div id="myViewer"> 
           
           </div>
+
+          <div id="SetPdiv"> 
+              <input id="GetProp" type="button" value="Get Property" /> 
+              <input id="SetProp" type="button" value="Set Property" /><br />
+              &nbsp;<br />
+              <table class="ConfigProTB" id="ConfigProTB">
+              <thead>
+                  <tr>
+                      <td class="auto-style1">name</td>
+                      <td>value</td>           
+                  </tr>
+              </thead>
+              <tbody><tr></tr></tbody>
+            </table>
+          </div>
          
            <div id="QuatoDiv">
                    <div id="Sel_Update_Div">
-                        <select id="modelSelection" name="modelSelection">
-                          <option>Tuner</option>
-                          <%-- <option>SimpleTest</option>--%>
+                        <select id="modelSelection" name="modelSelection">                          
+                          <option>SimpleTest</option>
+                            <option>Tuner</option>
                         </select>&nbsp; 
                        <input id="UpdateQuato" type="button" value="Update Cost" /> <br />
                    </div> <%--Sel_Update_Div--%>
@@ -156,12 +195,12 @@
    </form>
 </body>
 
-<script type='text/javascript' src='https://s3.amazonaws.com/dynatable-docs-assets/js/jquery-1.9.1.min.js'></script>
-<script type='text/javascript' src='https://s3.amazonaws.com/dynatable-docs-assets/js/jquery.scrollTo.js'></script>
-<script type='text/javascript' src='https://s3.amazonaws.com/dynatable-docs-assets/js/jquery.toc.min.js'></script>
-<script type='text/javascript' src='https://s3.amazonaws.com/dynatable-docs-assets/js/jquery.sharrre-1.2.0.min.js'></script>
-<link rel="stylesheet" media="all" href="https://s3.amazonaws.com/dynatable-docs-assets/css/jquery.dynatable.css" />    
-<script type='text/javascript' src='https://s3.amazonaws.com/dynatable-docs-assets/js/jquery.dynatable.js'></script>
+<script type='text/javascript' src='Scripts\jquery-1.9.1.min.js'></script>
+<script type='text/javascript' src='Scripts\jquery.scrollTo.js'></script>
+<script type='text/javascript' src='Scripts\jquery.toc.min.js'></script>
+<script type='text/javascript' src='Scripts\jquery.sharrre-1.2.0.min.js'></script>
+<link rel="stylesheet" media="all" href="Scripts\jquery.dynatable.css" />    
+<script type='text/javascript' src='Scripts\jquery.dynatable.js'></script>
 
 <script type="text/javascript" src="https://configurator360.autodesk.com/Script/EmbeddedViewer"></script>
 <script type="text/javascript" src = "Scripts\DTable.js"></script>

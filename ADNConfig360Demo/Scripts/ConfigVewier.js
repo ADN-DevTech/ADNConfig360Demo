@@ -41,7 +41,7 @@
             }
 
             if (modelName == "SimpleTest") {
-                guid = "38879945991951030/3c71gs3wktqv";
+                guid = "38879945991951030/d2g2bmfhdt4r";
             }
 
             var showpanes = {
@@ -66,13 +66,73 @@
         }
     }
 
-    loadModel("Tuner");
+    loadModel("SimpleTest");
 
-    //get the model paramters.
+
+    $("#SetProp").click(function () {
+       
+        var cit = $("#ConfigProTB"); 
+
+        if (C360Viewer != null && cit.size() > 0) {
+            var jsonSet = "{";
+           
+            $("#ConfigProTB tbody tr").each(function (trindex, tritem) {                  
+                $(tritem).find("td").each(function (tdindex) {                   
+                    if (tdindex == 0) {
+                        if (trindex > 1)
+                            jsonSet = jsonSet + ",";
+                        jsonSet = jsonSet + $(this).text();
+                    }
+                    if (tdindex == 1) {
+                        var textVal = $(this).find("input[type='text']").val();
+                        jsonSet = jsonSet + ":" + textVal;
+                    }  
+                });
+            });
+
+            jsonSet = jsonSet + "}";
+            var finalJson = eval("(" + jsonSet + ")");
+
+            C360Viewer.setPropertyValues(finalJson);
+           
+        }
+    });
+
+    function SetPropjsonResult(result) {
+
+        //backup
+    }
+
+
+
+    $("#GetProp").click(function () {
+        if(C360Viewer!=null)
+          C360Viewer.getPropertyValues(null, GetPropjsonResult);
+    }); 
+
     function GetPropjsonResult(result) {
-        if (global.settings.materialjson != "") {
 
+        var cit = $("#ConfigProTB tbody");
+        if (cit.size() > 0) {
+            cit.find("tr:not(:first)").remove();
+        }
 
+        var PropJsonResp = window.JSON.stringify(result, null, '  ');
+        var PropJsonResult;
+        PropJsonResult = eval("(" + PropJsonResp + ")");
+
+        var len = PropJsonResult.properties.length;
+        for (var i = 0; i < len; i++) {
+            var oPName = PropJsonResult.properties[i].name;
+            var oPValue = PropJsonResult.properties[i].value;
+
+            var newRow = "<tr><td>" + oPName +"</td><td><input type=\"text\" value=\""+oPValue + "\"></td></tr>";
+            $("#ConfigProTB tbody tr:last").after(newRow); 
+        } 
+    } 
+    //get the model paramters.
+    function UpdateCost(result) {
+        if (global.settings.materialjson != "") { 
             for (var i = QuatoTable.rows.length - 1; i > 0; i--) {
                 QuatoTable.deleteRow(i);
             }
@@ -156,7 +216,7 @@
     $("#UpdateQuato").click(function () {
         //alert("UpdateQuato");
 
-        C360Viewer.getPropertyValues(null, GetPropjsonResult);
+        C360Viewer.getPropertyValues(null, UpdateCost);
 
         var myDate = new Date();
         myDate.toLocaleString();
@@ -198,5 +258,7 @@
         var option = $("#modelSelection").val();
         loadModel(option);
     });
+
+
 
 }(this));
